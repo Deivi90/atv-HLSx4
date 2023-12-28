@@ -1,106 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:argType="http://schemas.android.com/tools"
-    android:id="@+id/root"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="true"
-    android:keepScreenOn="true">
+    tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/toplayout"
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="top"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:nextFocusRight="@id/blfNavBar"
+        android:layout_height="match_parent" />
 
-        <com.google.android.exoplayer2.ui.StyledPlayerView
-            android:id="@+id/playerView"
+    <androidx.leanback.widget.BrowseFrameLayout
+        android:id="@+id/blfNavBar"
+        android:layout_width="50dp"
+        android:background="#000000"
+        android:nextFocusLeft="@id/container"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="32dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:visibility="visible"
-            app:show_shuffle_button="false"
-            app:show_subtitle_button="false"
-            app:show_vr_button="false"
-            argType:fastforward_increment="15000"
-            argType:resize_mode="fixed_width"
-            argType:rewind_increment="15000"
-            argType:show_buffering="when_playing"
-            argType:show_fastforward_button="false"
-            argType:show_next_button="false"
-            argType:show_previous_button="false"
-            argType:show_rewind_button="true"
-            argType:show_subtitle_button="false"
-            argType:use_artwork="true"
-            argType:use_controller="true"
-            argType:use_sensor_rotation="true" />
+            android:layout_height="match_parent">
 
-        <com.google.android.exoplayer2.ui.StyledPlayerView
-            android:id="@+id/playerView2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:show_subtitle_button="false"
-            argType:fastforward_increment="15000"
-            argType:resize_mode="fixed_width"
-            argType:rewind_increment="15000"
-            argType:show_buffering="when_playing"
-            argType:show_fastforward_button="true"
-            argType:show_next_button="false"
-            argType:show_previous_button="false"
-            argType:show_rewind_button="true"
-            argType:show_subtitle_button="true"
-            argType:use_artwork="true"
-            argType:use_controller="true"
-            argType:use_sensor_rotation="true" />
+            <TextView
+                android:id="@+id/btn_home"
+                android:text="Home"
+                android:layout_width="match_parent"
+                android:focusable="true"
+                android:layout_height="45dp"
+                android:layout_marginLeft="16dp"
+                android:drawableLeft="@drawable/ic_home"
+                android:gravity="center_vertical"
+                android:drawablePadding="16dp"
+                android:background="@drawable/selector_menu"
+                android:textColor="@color/text_selector_white_grey"/>
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_below="@id/toplayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="2">
+            <TextView
+                android:id="@+id/btn_search"
+                android:text="Play"
+                android:layout_width="match_parent"
+                android:focusable="true"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:drawableLeft="@drawable/ic_player"
+                android:drawablePadding="16dp"
+                android:background="@drawable/selector_menu"
+                android:textColor="@color/text_selector_white_grey"/>
 
-        <com.google.android.exoplayer2.ui.StyledPlayerView
-            android:id="@+id/playerView3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:show_subtitle_button="false"
-            argType:fastforward_increment="15000"
-            argType:resize_mode="fixed_width"
-            argType:rewind_increment="15000"
-            argType:show_buffering="when_playing"
-            argType:show_fastforward_button="true"
-            argType:show_next_button="false"
-            argType:show_previous_button="false"
-            argType:show_rewind_button="true"
-            argType:show_subtitle_button="true"
-            argType:use_artwork="true"
-            argType:use_controller="true"
-            argType:use_sensor_rotation="true" />
+        </LinearLayout>
+    </androidx.leanback.widget.BrowseFrameLayout>
 
-        <com.google.android.exoplayer2.ui.StyledPlayerView
-            android:id="@+id/playerView4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:show_subtitle_button="false"
-            argType:fastforward_increment="15000"
-            argType:resize_mode="fixed_width"
-            argType:rewind_increment="15000"
-            argType:show_buffering="when_playing"
-            argType:show_fastforward_button="true"
-            argType:show_next_button="false"
-            argType:show_previous_button="false"
-            argType:show_rewind_button="true"
-            argType:show_subtitle_button="true"
-            argType:use_artwork="true"
-            argType:use_controller="true"
-            argType:use_sensor_rotation="true" />
-    </LinearLayout>
-</RelativeLayout>
+</merge>

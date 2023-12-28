@@ -1,10 +1,6 @@
 package com.example.tvx4
 
 import android.content.Context
-import android.os.Bundle
-import android.util.AttributeSet
-import android.widget.FrameLayout
-import com.example.tvx4.databinding.ActivityMainBinding
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.hls.HlsMediaSource
@@ -30,6 +26,7 @@ class ExoPlayerView(private var context: Context, private var url: String) {
         exoPlayer?.setMediaSource(mediaSource)
         //exoPlayer?.seekTo(playbackPosition)
         //exoPlayer?.playWhenReady = playWhenReady
+        exoPlayer?.volume = 0.2F
         exoPlayer?.prepare()
     }
 
