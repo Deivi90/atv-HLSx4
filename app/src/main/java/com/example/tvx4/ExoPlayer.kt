@@ -7,7 +7,7 @@ import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 
-class ExoPlayerView(private var context: Context, private var url: String) {
+class ExoPlayer(private var context: Context, private var url: String) {
 
     private var exoPlayer: ExoPlayer? = null
     private var playbackPosition = 0L
@@ -24,11 +24,18 @@ class ExoPlayerView(private var context: Context, private var url: String) {
         val mediaSource =
             HlsMediaSource.Factory(defaultHttpDataSourceFactory).createMediaSource(mediaItem)
         exoPlayer?.setMediaSource(mediaSource)
-        //exoPlayer?.seekTo(playbackPosition)
-        //exoPlayer?.playWhenReady = playWhenReady
         exoPlayer?.volume = 0.2F
         exoPlayer?.prepare()
     }
+
+
+    fun setVolume(value : Float){
+        exoPlayer?.let { player ->
+            player.volume = value
+        }
+
+    }
+
 
     fun releasePlayer(){
         exoPlayer?.let { player ->
@@ -38,5 +45,4 @@ class ExoPlayerView(private var context: Context, private var url: String) {
             exoPlayer = null
         }
     }
-
 }

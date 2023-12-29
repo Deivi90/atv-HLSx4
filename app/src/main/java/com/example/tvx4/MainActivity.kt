@@ -1,6 +1,6 @@
 package com.example.tvx4
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -14,7 +14,6 @@ class MainActivity : FragmentActivity(), View.OnKeyListener {
 
     lateinit var navBar: BrowseFrameLayout
     lateinit var fragmentContainer: FrameLayout
-
     lateinit var btnHome: TextView
     lateinit var btnPlay: TextView
     var SIDE_MENU = false
@@ -28,22 +27,21 @@ class MainActivity : FragmentActivity(), View.OnKeyListener {
 
         fragmentContainer = findViewById(R.id.container)
         navBar = findViewById(R.id.blfNavBar)
-        btnPlay = findViewById(R.id.btn_search)
+        btnPlay = findViewById(R.id.btn_player)
         btnHome = findViewById(R.id.btn_home)
 
         btnHome.setOnKeyListener(this)
         btnPlay.setOnKeyListener(this)
 
-        lastSelectedMenu = btnPlay
-        //lastSelectedMenu.isActivated = true
-        changeFragment(SearchFragment())
+        lastSelectedMenu = btnHome
+        lastSelectedMenu.isActivated = true
+        changeFragment(HomeFragment())
     }
 
     fun changeFragment(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, fragment)
         transaction.commit()
-
         closeMenu()
     }
 
@@ -51,29 +49,24 @@ class MainActivity : FragmentActivity(), View.OnKeyListener {
     override fun onKey(view: View?, i: Int, key_event: KeyEvent?): Boolean {
         when (i) {
             KeyEvent.KEYCODE_DPAD_CENTER -> {
-
                 lastSelectedMenu.isActivated = false
                 view?.isActivated = true
                 lastSelectedMenu = view!!
-
                 when (view?.id) {
-                    R.id.btn_search -> {
-                        selectedMenu = "search"
-                        changeFragment(PlayerActivity(this))
+                    R.id.btn_player -> {
+                        selectedMenu = "player"
+                        val intent = Intent(this, PlayerActivity::class.java)
+                        startActivity(intent)
                     }
-
                     R.id.btn_home -> {
                         selectedMenu = "home"
-                        changeFragment(SearchFragment())
+                        changeFragment(HomeFragment())
                     }
                 }
-
             }
-
             KeyEvent.KEYCODE_DPAD_LEFT -> {
                 if (!SIDE_MENU) {
                     switchToLastSelectedMenu()
-
                     openMenu()
                     SIDE_MENU = true
                 }
@@ -81,6 +74,7 @@ class MainActivity : FragmentActivity(), View.OnKeyListener {
         }
         return false
     }
+
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT && SIDE_MENU){
@@ -103,7 +97,7 @@ class MainActivity : FragmentActivity(), View.OnKeyListener {
 
     fun switchToLastSelectedMenu() {
         when (selectedMenu) {
-            "search" -> {
+            "player" -> {
                 btnPlay.requestFocus()
             }
             "home" -> {
@@ -116,12 +110,12 @@ class MainActivity : FragmentActivity(), View.OnKeyListener {
     fun openMenu(){
         navBar.requestLayout()
         navBar.layoutParams.width = (this.resources.displayMetrics.widthPixels ?: 0) * 16 /100
+        lastSelectedMenu.isActivated = false
     }
 
     fun closeMenu(){
         navBar.requestLayout()
-        navBar.layoutParams.width = (this.resources.displayMetrics.widthPixels ?: 0) * 3 /100
-
+        navBar.layoutParams.width = (this.resources.displayMetrics.widthPixels ?: 0) * 5 /100
         fragmentContainer.requestFocus()
         SIDE_MENU = false
     }
