@@ -9,16 +9,18 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.leanback.widget.BrowseFrameLayout
+import com.example.tvx4.utils.Constants
 
-class MainActivity : FragmentActivity(), View.OnKeyListener {
+class MainActivity : FragmentActivity(), View.OnKeyListener, ChannelData {
 
     lateinit var navBar: BrowseFrameLayout
     lateinit var fragmentContainer: FrameLayout
     lateinit var btnHome: TextView
     lateinit var btnPlay: TextView
     var SIDE_MENU = false
-    var selectedMenu = "search"
-
+    var selectedMenu = Constants.MENU_HOME
+    var channelUrl= Array<String>(4) { "https://arlocallive.lcdn.clarotv.com.ar" +
+            "/Content/HLS_HLS_FK/Live/channel(A24)/index.m3u8" }
     lateinit var lastSelectedMenu: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,14 +54,15 @@ class MainActivity : FragmentActivity(), View.OnKeyListener {
                 lastSelectedMenu.isActivated = false
                 view?.isActivated = true
                 lastSelectedMenu = view!!
-                when (view?.id) {
+                when (view.id) {
                     R.id.btn_player -> {
-                        selectedMenu = "player"
+                        selectedMenu = Constants.MENU_PLAY
                         val intent = Intent(this, PlayerActivity::class.java)
+                        intent.putExtra("url", channelUrl)
                         startActivity(intent)
                     }
                     R.id.btn_home -> {
-                        selectedMenu = "home"
+                        selectedMenu = Constants.MENU_HOME
                         changeFragment(HomeFragment())
                     }
                 }
@@ -86,9 +89,9 @@ class MainActivity : FragmentActivity(), View.OnKeyListener {
 
 
     override fun onBackPressed() {
-        if (SIDE_MENU) {
-            SIDE_MENU = false
-            closeMenu()
+        if (!SIDE_MENU) {
+            SIDE_MENU = true
+            openMenu()
         } else {
             super.onBackPressed()
         }
@@ -97,10 +100,10 @@ class MainActivity : FragmentActivity(), View.OnKeyListener {
 
     fun switchToLastSelectedMenu() {
         when (selectedMenu) {
-            "player" -> {
+            Constants.MENU_PLAY -> {
                 btnPlay.requestFocus()
             }
-            "home" -> {
+            Constants.MENU_HOME -> {
                 btnHome.requestFocus()
             }
         }
@@ -120,5 +123,8 @@ class MainActivity : FragmentActivity(), View.OnKeyListener {
         SIDE_MENU = false
     }
 
+    override fun setUrl(array: Array<String>) {
+        channelUrl = array
+    }
 
 }

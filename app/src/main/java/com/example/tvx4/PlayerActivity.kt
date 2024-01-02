@@ -4,20 +4,22 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.example.tvx4.databinding.ActivityPlayerBinding
 
+//Pantalla de Monitores
 class PlayerActivity : FragmentActivity() {
     private lateinit var binding: ActivityPlayerBinding
-    val URL ="https://arlocallive.lcdn.clarotv.com.ar/Content/HLS_HLS_FK/Live/channel(TELEFE)/index.m3u8"
-    val URL1 ="https://arlocallive.lcdn.clarotv.com.ar/Content/HLS_HLS_FK/Live/channel(C5N)/index.m3u8"
-    val URL2 ="https://arlocallive.lcdn.clarotv.com.ar/Content/HLS_HLS_FK/Live/channel(A24)/index.m3u8"
-    val URL3 ="https://arlocallive.lcdn.clarotv.com.ar/Content/HLS_HLS_FK/Live/channel(ESPN)/index.m3u8"
-    private var topRPlayer = ExoPlayer(this,URL)
-    private var topLPlayer = ExoPlayer(this,URL1)
-    private var bottomRPlayer = ExoPlayer(this,URL2)
-    private var bottomLPlayer = ExoPlayer(this,URL3)
+    private lateinit var topRPlayer : ExoPlayer
+    private lateinit var topLPlayer : ExoPlayer
+    private lateinit var bottomRPlayer : ExoPlayer
+    private lateinit var bottomLPlayer : ExoPlayer
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val channelUrl = intent.getStringArrayExtra("url")!!
+        topRPlayer = ExoPlayer(this, channelUrl[0])
+        topLPlayer = ExoPlayer(this,channelUrl[1])
+        bottomRPlayer = ExoPlayer(this,channelUrl[2])
+        bottomLPlayer = ExoPlayer(this,channelUrl[3])
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         topRPlayer.preparePlayer(binding.playerView)
@@ -36,6 +38,11 @@ class PlayerActivity : FragmentActivity() {
 
     override fun onPause() {
         super.onPause()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        onDestroy()
     }
 
     override fun onDestroy() {
