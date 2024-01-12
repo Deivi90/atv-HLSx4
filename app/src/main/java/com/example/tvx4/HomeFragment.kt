@@ -1,6 +1,8 @@
 package com.example.tvx4
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,9 +66,11 @@ class HomeFragment : Fragment() {
             updateBanner(it)
         }
         listFragment.setOnItemClickListener () {
+            val handler = Handler(Looper.getMainLooper())
             val text = "Pantalla " + (channelIndex + 1) + ": " + it.name
-            toast = Toast.makeText(requireContext(), text, Toast.LENGTH_LONG)
+            toast = Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT)
             toast.show()
+            handler.postDelayed(Runnable { toast.cancel() }, 500)
             channelUrl[channelIndex] = it.group.common.extendedcommon.media
                 .language.options.option[0].fastPlay.ipMulticastLms
             channelIndex = (channelIndex + 1) % 4

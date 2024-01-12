@@ -118,7 +118,7 @@ class MainActivity : FragmentActivity(), View.OnKeyListener, ChannelData {
 
     fun closeMenu(){
         navBar.requestLayout()
-        navBar.layoutParams.width = (this.resources.displayMetrics.widthPixels ?: 0) * 5 /100
+        navBar.layoutParams.width = (this.resources.displayMetrics.widthPixels ?: 0) * 6 /100
         fragmentContainer.requestFocus()
         SIDE_MENU = false
     }

@@ -21,86 +21,37 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:visibility="visible"
-            app:show_shuffle_button="false"
-            app:show_subtitle_button="false"
-            app:show_vr_button="false"
-            argType:fastforward_increment="15000"
-            argType:resize_mode="fixed_width"
-            argType:rewind_increment="15000"
-            argType:show_buffering="when_playing"
-            argType:show_fastforward_button="false"
-            argType:show_next_button="false"
-            argType:show_previous_button="false"
-            argType:show_rewind_button="true"
-            argType:show_subtitle_button="false"
-            argType:use_artwork="true"
-            argType:use_controller="true"
-            argType:use_sensor_rotation="true" />
+            android:visibility="visible"/>
 
         <com.google.android.exoplayer2.ui.StyledPlayerView
             android:id="@+id/playerView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:show_subtitle_button="false"
-            argType:fastforward_increment="15000"
-            argType:resize_mode="fixed_width"
-            argType:rewind_increment="15000"
-            argType:show_buffering="when_playing"
-            argType:show_fastforward_button="true"
-            argType:show_next_button="false"
-            argType:show_previous_button="false"
-            argType:show_rewind_button="true"
-            argType:show_subtitle_button="true"
-            argType:use_artwork="true"
-            argType:use_controller="true"
-            argType:use_sensor_rotation="true" />
+            android:visibility="visible"/>
 
     </LinearLayout>
     <LinearLayout
         android:layout_below="@id/toplayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="2">
 
         <com.google.android.exoplayer2.ui.StyledPlayerView
             android:id="@+id/playerView3"
+            app:resize_mode="zoom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:show_subtitle_button="false"
-            argType:fastforward_increment="15000"
-            argType:resize_mode="fixed_width"
-            argType:rewind_increment="15000"
-            argType:show_buffering="when_playing"
-            argType:show_fastforward_button="true"
-            argType:show_next_button="false"
-            argType:show_previous_button="false"
-            argType:show_rewind_button="true"
-            argType:show_subtitle_button="true"
-            argType:use_artwork="true"
-            argType:use_controller="true"
-            argType:use_sensor_rotation="true" />
+            android:visibility="visible"/>
 
         <com.google.android.exoplayer2.ui.StyledPlayerView
             android:id="@+id/playerView4"
+            app:resize_mode="zoom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:show_subtitle_button="false"
-            argType:fastforward_increment="15000"
-            argType:resize_mode="fixed_width"
-            argType:rewind_increment="15000"
-            argType:show_buffering="when_playing"
-            argType:show_fastforward_button="true"
-            argType:show_next_button="false"
-            argType:show_previous_button="false"
-            argType:show_rewind_button="true"
-            argType:show_subtitle_button="true"
-            argType:use_artwork="true"
-            argType:use_controller="true"
-            argType:use_sensor_rotation="true" />
+            android:visibility="visible"/>
     </LinearLayout>
 </RelativeLayout>
